@@ -12,7 +12,7 @@ public class Team {
     }
 
     void teamInfo() {
-        System.out.println("Наша команда");
+        System.out.println(teamName);
         for (Competitor c : teamMembers) {
             c.info();
         }

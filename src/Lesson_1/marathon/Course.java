@@ -12,7 +12,7 @@ public class Course {
 
     public void doCourseTogether(Team team) {
 
-        System.out.print("Список препятствий: ");
+        System.out.print("\nСписок препятствий: ");
         for (Obstacle o : course) {
             System.out.print(o.getClass().getSimpleName() + " ");
         }
