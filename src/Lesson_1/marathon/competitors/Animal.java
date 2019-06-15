@@ -7,6 +7,7 @@ public class Animal implements Competitor {
     int maxRunDistance;
     int maxSwimDistance;
     int maxJumpHeight;
+    private int score;
 
     boolean onDistance;
 
@@ -20,9 +21,10 @@ public class Animal implements Competitor {
     }
 
     @Override
-    public void run(int dist) {
+    public void run(int dist, int points) {
         if (dist <= maxRunDistance) {
             System.out.println(type + " " + name + " успешно пробежал ");
+            score+=points;
         } else {
             System.out.println(type + " " + name + " не смог пробежать ");
             onDistance = false;
@@ -30,9 +32,10 @@ public class Animal implements Competitor {
     }
 
     @Override
-    public void swim(int dist) {
+    public void swim(int dist, int points) {
         if (dist <= maxSwimDistance) {
             System.out.println(type + " " + name + " успешно проплыл ");
+            score+=points;
         } else {
             System.out.println(type + " " + name + " не смог проплыть ");
             onDistance = false;
@@ -40,9 +43,10 @@ public class Animal implements Competitor {
     }
 
     @Override
-    public void jump(int height) {
+    public void jump(int height, int points) {
         if (height <= maxJumpHeight) {
             System.out.println(type + " " + name + " успешно прыгнул ");
+            score+=points;
         } else {
             System.out.println(type + " " + name + " не смог перепрыгнуть ");
             onDistance = false;
@@ -57,5 +61,10 @@ public class Animal implements Competitor {
     @Override
     public void info() {
         System.out.println(type + " " + name + " "+ onDistance);
+    }
+
+    @Override
+    public int getCurrentScore() {
+        return score;
     }
 }

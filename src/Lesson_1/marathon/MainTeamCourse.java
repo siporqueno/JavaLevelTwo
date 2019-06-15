@@ -11,7 +11,7 @@ import Lesson_1.marathon.obstacles.Water;
 
 public class MainTeamCourse {
     private static Competitor[] competitors = {new Human("Bob"), new Cat("Vaska"), new Dog("Tuzik")};
-    private static Obstacle[] obstacles = {new Cross(80), new Wall(2), new Water(10)};
+    private static Obstacle[] obstacles = {new Cross(80, 10), new Wall(2, 5), new Water(10, 15)};
 
     public static void main(String[] args) {
         Team dreamTeam = new Team("Команда мечты", competitors);
