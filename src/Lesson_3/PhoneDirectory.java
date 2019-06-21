@@ -3,6 +3,7 @@ package Lesson_3;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class PhoneDirectory {
 
@@ -13,6 +14,9 @@ public class PhoneDirectory {
         add("Ivanov", 123);
         add("Petrov", 456);
         add("Petrov", 456);
+        get("Ivanov");
+        get("Petrov");
+        get("Sidorov");
     }
 
     //    The following method adds one entry (Surname and telephone number) to the directory
@@ -30,4 +34,18 @@ public class PhoneDirectory {
             System.out.printf("Запись %s %d уже есть в телефонном справочнике\n", surname, phoneNum);
         }
     }
+
+    static void get(String surname) {
+        Set<Map.Entry<String, ArrayList>> mapAsSet = phoneDirectory.entrySet();
+        boolean flagFound = false;
+        for (Map.Entry<String, ArrayList> mapAsSetEntry : mapAsSet) {
+            if (mapAsSetEntry.getKey().equals(surname)) {
+                System.out.printf(" Телефоны по фамилии %s:\n", surname);
+                System.out.println(mapAsSetEntry.getValue());
+                flagFound = true;
+            }
+        }
+        if (!flagFound) System.out.printf(" Телефонов по фамилии %s не найдено\n", surname);
+    }
+
 }
