@@ -14,12 +14,7 @@ public class Controller {
     @FXML
     public Button btnSend;
 
-    public void onActionBtnSend(ActionEvent actionEvent) {
-        textArea.appendText(textField.getText() + "\n");
-        textField.setText("");
-    }
-
-    public void onActionTextField(ActionEvent actionEvent) {
+    public void onActionTextFieldAndBtnSend(ActionEvent actionEvent) {
         textArea.appendText(textField.getText() + "\n");
         textField.setText("");
     }

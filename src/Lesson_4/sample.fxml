@@ -26,8 +26,8 @@
 <!--            <padding>-->
 <!--                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>-->
 <!--            </padding>-->
-            <TextField fx:id="textField" onAction="#onActionTextField" HBox.hgrow="ALWAYS"/>
-            <Button fx:id="btnSend" onAction="#onActionBtnSend" prefWidth="50" text="Send"/>
+            <TextField fx:id="textField" onAction="#onActionTextFieldAndBtnSend" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnSend" onAction="#onActionTextFieldAndBtnSend" prefWidth="50" text="Send"/>
         </HBox>
     </bottom>
 
