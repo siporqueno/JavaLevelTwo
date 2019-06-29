@@ -9,16 +9,17 @@ public class ConcurrentOpsOnArray {
         new ConcurrentOpsOnArray().concurrentOpsOnArrForTwoThreads();
 
         for (int i = 0; i <= 7; i++) {
-            System.out.println("Число потоков: " + (int)Math.pow(2, i) + " (2 в степени " + i+")");
+            System.out.println("Число потоков: " + (int) Math.pow(2, i) + " (2 в степени " + i + ")");
             new ConcurrentOpsOnArray().concurrentOpsOnArrForSomeNoOfThreads((int) Math.pow(2, i));
         }
 
         for (int i = 0; i <= 7; i++) {
-            System.out.println("Число потоков: " + (int)Math.pow(10, i) + " (10 в степени " + i+")");
+            System.out.println("Число потоков: " + (int) Math.pow(10, i) + " (10 в степени " + i + ")");
             new ConcurrentOpsOnArray().concurrentOpsOnArrForSomeNoOfThreads((int) Math.pow(10, i));
         }
     }
 
+    // One thread
     void consecutiveOpsOnArr() {
         long a;
         float[] arr = new float[SIZE];
@@ -32,9 +33,10 @@ public class ConcurrentOpsOnArray {
 
         a = System.currentTimeMillis() - a;
 
-        System.out.println("Один поток \n"+a);
+        System.out.println("Один поток \n" + a);
     }
 
+    // Two threads
     void concurrentOpsOnArrForTwoThreads() {
         long a;
         float[] arr = new float[SIZE];
@@ -69,15 +71,10 @@ public class ConcurrentOpsOnArray {
 
         a = System.currentTimeMillis() - a;
 
-        System.out.println("Два потока \n"+a);
+        System.out.println("Два потока \n" + a);
     }
 
-    void calculate(float[] inputArr, int shift) {
-        for (int i = 0; i < inputArr.length; i++) {
-            inputArr[i] = (float) (inputArr[i] * Math.sin(0.2f + (i + shift) / 5) * Math.cos(0.2f + (i + shift) / 5) * Math.cos(0.4f + (i + shift) / 2));
-        }
-    }
-
+    // Number of threads = threadsNo
     void concurrentOpsOnArrForSomeNoOfThreads(int threadsNo) {
         long a;
         float[] arr = new float[SIZE];
@@ -110,9 +107,6 @@ public class ConcurrentOpsOnArray {
             e.printStackTrace();
         }
 
-       /* System.arraycopy(tempArr[0], 0, arr, 0, HALF);
-        System.arraycopy(tempArr[1], 0, arr, HALF, HALF);*/
-
         for (int i = 0; i < threadsNo; i++) {
             System.arraycopy(tempArr[i], 0, arr, subSize * i, subSize);
         }
@@ -120,5 +114,11 @@ public class ConcurrentOpsOnArray {
         a = System.currentTimeMillis() - a;
 
         System.out.println(a);
+    }
+
+    void calculate(float[] inputArr, int shift) {
+        for (int i = 0; i < inputArr.length; i++) {
+            inputArr[i] = (float) (inputArr[i] * Math.sin(0.2f + (i + shift) / 5) * Math.cos(0.2f + (i + shift) / 5) * Math.cos(0.4f + (i + shift) / 2));
+        }
     }
 }
