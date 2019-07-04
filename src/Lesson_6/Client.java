@@ -24,7 +24,7 @@ public class Client {
                     while (true) {
                         String str = in.nextLine();
 //                out.flush();
-                        System.out.println(str);
+                        System.out.println("Server: " + str);
                     }
 
                 }

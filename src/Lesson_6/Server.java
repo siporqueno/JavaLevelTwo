@@ -45,7 +45,7 @@ public class Server {
                 }
 //                out.flush();
 
-                System.out.println(str);
+                System.out.println("Client: " + str);
 //                out.println("echo : " + str);
 
 
