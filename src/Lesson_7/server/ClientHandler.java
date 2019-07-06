@@ -34,7 +34,7 @@ public class ClientHandler {
                                 server.subscribe(this);
                                 break;
                             } else {
-                                sendMsg("Неверный логин / пароль");
+                                sendMsg("Wrong login / password");
                             }
                         }
                     }
@@ -52,7 +52,7 @@ public class ClientHandler {
 //                        Start of my code, home work of Lesson 7, task 1
                         if (str.startsWith("/w")) {
                             String[] token = str.split(" ");
-                            server.sendMsgToNick(token[1], str);
+                            server.sendMsgToNick(token[1], str.substring(token[0].length() + token[1].length() + 2, str.length()));
                         } else server.broadcastMsg(nick + ": " + str);
 
 

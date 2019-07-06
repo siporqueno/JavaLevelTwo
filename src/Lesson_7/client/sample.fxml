@@ -7,10 +7,10 @@
       fx:controller="Lesson_7.client.Controller">
 
     <HBox fx:id="upperPanel">
-        <TextField fx:id="loginField" HBox.hgrow="ALWAYS" promptText="Логин"/>
+        <TextField fx:id="loginField" HBox.hgrow="ALWAYS" promptText="Login"/>
         <PasswordField fx:id="passwordField" HBox.hgrow="ALWAYS"
-                       promptText="Пароль" onAction="#tryToAuth"/>
-        <Button text="Авторизоваться" onAction="#tryToAuth"/>
+                       promptText="Password" onAction="#tryToAuth"/>
+        <Button text="Authorize" onAction="#tryToAuth"/>
     </HBox>
 
     <TextArea fx:id="textArea" editable="false" prefWidth="200" VBox.vgrow="ALWAYS">
