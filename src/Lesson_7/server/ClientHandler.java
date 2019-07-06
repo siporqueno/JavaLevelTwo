@@ -28,13 +28,18 @@ public class ClientHandler {
                             String[] token = str.split(" ");
                             String newNick =
                                     AuthService.getNickByLoginAndPass(token[1], token[2]);
-                            if (newNick != null) {
+                            //      Start of my code, home work of Lesson 7, task 2
+                            if (newNick != null && !server.isNickOn(newNick))
+                            //      End of my code, home work of Lesson 8, task 2
+                            {
                                 sendMsg("/authok");
                                 nick = newNick;
                                 server.subscribe(this);
                                 break;
                             } else {
-                                sendMsg("Wrong login / password");
+                                //      Start of my code, home work of Lesson 7, task 2
+                                sendMsg(server.isNickOn(newNick) ? "Such User is already authorized" : "Wrong login / password");
+                                //      End of my code, home work of Lesson 8, task 2
                             }
                         }
                     }
@@ -79,7 +84,7 @@ public class ClientHandler {
                         e.printStackTrace();
                     }
                     server.unsubscribe(this);
-                    System.out.println("Клиент оключился");
+                    System.out.println("Клиент отключился");
                 }
             }).start();
 

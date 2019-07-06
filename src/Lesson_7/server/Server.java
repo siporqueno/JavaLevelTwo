@@ -66,4 +66,13 @@ public class Server {
     }
     //    End of my code, home work of Lesson 8, task 1
 
+    //    Start of my code, home work of Lesson 7, task 2
+    public boolean isNickOn(String nick) {
+        for (ClientHandler o : clients) {
+            if (o.nick.equals(nick)) return true;
+        }
+        return false;
+    }
+    //    End of my code, home work of Lesson 8, task 2
+
 }
