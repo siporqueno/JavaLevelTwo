@@ -38,6 +38,28 @@ public class Controller {
     final String IP_ADRESS = "localhost";
     final int PORT = 8189;
 
+    /*@Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //            Start of my code, home work of Lesson 8
+        new Thread(()-> {
+            try {
+                Thread.sleep(60000);
+                System.out.println("60 sec have passed");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (!isAuthorized) {
+                try {
+                    out.writeUTF("/end");
+                    System.out.println("60 sec have passed without authorization");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+//
+    }*/
+
     public void setAuthorized(boolean isAuthorized) {
         this.isAuthorized = isAuthorized;
         if (isAuthorized) {
@@ -58,6 +80,24 @@ public class Controller {
             socket = new Socket(IP_ADRESS, PORT);
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
+
+//            Start of my code, home work of Lesson 8
+            /*new Thread(()-> {
+                try {
+                    Thread.sleep(60000);
+                    System.out.println("60 sec have passed");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!isAuthorized) {
+                    try {
+                        out.writeUTF("/end");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();*/
+//            End of my code, home work of Lesson 8
 
             new Thread(new Runnable() {
                 @Override

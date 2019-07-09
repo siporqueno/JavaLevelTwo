@@ -44,9 +44,9 @@ public class Server {
         }
     }
 
-    public void broadcastMsg(String str) {
+    public void broadcastMsg(String str, String sender) {
         for (ClientHandler o : clients) {
-            o.sendMsg(str);
+            o.sendMsg(sender + ": " + str);
         }
     }
 
@@ -59,9 +59,11 @@ public class Server {
     }
 
     //    Start of my code, home work of Lesson 7, task 1
-    public void sendMsgToNick(String nick, String str) {
+    public void sendMsgFromNickToNick(String str, String sender, String receiver) {
         for (ClientHandler o : clients) {
-            if (o.nick.equals(nick)) o.sendMsg(str);
+            if (o.getNick().equals(sender) || o.getNick().equals(receiver)) {
+                o.sendMsg("private [" + sender + " ] to [ " + receiver + " ] :" + str);
+            }
         }
     }
     //    End of my code, home work of Lesson 8, task 1
@@ -69,7 +71,7 @@ public class Server {
     //    Start of my code, home work of Lesson 7, task 2
     public boolean isNickOn(String nick) {
         for (ClientHandler o : clients) {
-            if (o.nick.equals(nick)) return true;
+            if (o.getNick().equals(nick)) return true;
         }
         return false;
     }

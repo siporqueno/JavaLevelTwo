@@ -10,7 +10,7 @@ public class ClientHandler {
     private Socket socket;
     DataOutputStream out;
     DataInputStream in;
-    String nick;
+    private String nick;
 
     public ClientHandler(Server server, Socket socket) {
         try {
@@ -56,12 +56,12 @@ public class ClientHandler {
 
 //                        Start of my code, home work of Lesson 7, task 1
                         if (str.startsWith("/w")) {
-                            String[] token = str.split(" ");
-                            server.sendMsgToNick(token[1], str.substring(token[0].length() + token[1].length() + 2, str.length()));
-                        } else server.broadcastMsg(nick + ": " + str);
-
-
-                        System.out.println(str);
+                            String[] token = str.split(" ", 3);
+                            server.sendMsgFromNickToNick(token[2], getNick(), token[1]);
+                        } else {
+                            System.out.println(str);
+                            server.broadcastMsg(str, getNick());
+                        }
 //                        End of my code, home work of Lesson 8, task 1
 
                     }
@@ -99,5 +99,9 @@ public class ClientHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getNick() {
+        return nick;
     }
 }
