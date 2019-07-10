@@ -42,6 +42,13 @@ public class ClientHandler {
                                 //      End of my code, home work of Lesson 8, task 2
                             }
                         }
+
+                        //            Start of my code, home work of Lesson 8
+                        if (str.equals("/timeout120sec")) {
+                            out.writeUTF("/timeout120sec");
+                            break;
+                        }
+                        //            End of my code, home work of Lesson 8
                     }
 
                     //Цикл для работы
@@ -50,7 +57,7 @@ public class ClientHandler {
 
                         if (str.equals("/end")) {
                             out.writeUTF("/end");
-                            System.out.println("Клиент отключился");
+//                            System.out.println("Клиент отключился");
                             break;
                         }
 

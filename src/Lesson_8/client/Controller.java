@@ -39,27 +39,6 @@ public class Controller {
     final String IP_ADRESS = "localhost";
     final int PORT = 8189;
 
-    /*@Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //            Start of my code, home work of Lesson 8
-        new Thread(()-> {
-            try {
-                Thread.sleep(60000);
-                System.out.println("60 sec have passed");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (!isAuthorized) {
-                try {
-                    out.writeUTF("/end");
-                    System.out.println("60 sec have passed without authorization");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-//
-    }*/
 
     public void setAuthorized(boolean isAuthorized) {
         this.isAuthorized = isAuthorized;
@@ -86,24 +65,6 @@ public class Controller {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
 
-//            Start of my code, home work of Lesson 8
-            /*new Thread(()-> {
-                try {
-                    Thread.sleep(60000);
-                    System.out.println("60 sec have passed");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (!isAuthorized) {
-                    try {
-                        out.writeUTF("/end");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();*/
-//            End of my code, home work of Lesson 8
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -111,6 +72,13 @@ public class Controller {
                         //цикл авторизации
                         while (true) {
                             String str = in.readUTF();
+
+                            //            Start of my code, home work of Lesson 8
+                            if (str.equals("/timeout120sec")) {
+                                break;
+                            }
+                            //            End of my code, home work of Lesson 8
+
                             if (str.equals("/authok")) {
                                 setAuthorized(true);
                                 break;
@@ -154,6 +122,25 @@ public class Controller {
                     }
                 }
             }).start();
+
+            //            Start of my code, home work of Lesson 8
+            new Thread(() -> {
+                try {
+                    Thread.sleep(120000);
+                    System.out.println("The time for authorisation (120 sec) is over.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!isAuthorized) {
+                    try {
+                        out.writeUTF("/timeout120sec");
+                        out.writeUTF("/end");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+//            End of my code, home work of Lesson 8
 
         } catch (IOException e) {
             e.printStackTrace();
