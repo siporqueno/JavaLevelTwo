@@ -128,6 +128,7 @@ public class Controller {
                 try {
                     Thread.sleep(120000);
                     System.out.println("The time for authorisation (120 sec) is over.");
+                    textArea.appendText("The time for authorisation (120 sec) is over.");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
