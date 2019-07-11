@@ -32,8 +32,10 @@ public class ClientHandler {
                             if (newNick != null && !server.isNickOn(newNick))
                             //      End of my code, home work of Lesson 8, task 2
                             {
-                                sendMsg("/authok");
+//                                sendMsg("/authok");
+                                // will pass nick to the client
                                 nick = newNick;
+                                sendMsg("/authok "+nick);
                                 server.subscribe(this);
                                 break;
                             } else {

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -29,6 +30,9 @@ public class Controller {
     public PasswordField passwordField;
     @FXML
     public ListView<String> clientList;
+
+    // Added nick
+    private String nick;
 
     private boolean isAuthorized;
 
@@ -79,12 +83,22 @@ public class Controller {
                             }
                             //            End of my code, home work of Lesson 8
 
-                            if (str.equals("/authok")) {
+                            // substituted equals with startsWith
+                            if (str.startsWith("/authok")) {
                                 setAuthorized(true);
+                                //      Got nick
+                                nick = str.split(" ")[1];
                                 break;
                             }
                             textArea.appendText(str + "\n");
                         }
+
+                        // Added nick to the title of the Stage
+                        Platform.runLater(() -> {
+                            Stage stage = (Stage) textArea.getScene().getWindow();
+                            stage.setTitle("User: " + nick);
+                        });
+
                         //цикл работы
                         while (true) {
                             String str = in.readUTF();
