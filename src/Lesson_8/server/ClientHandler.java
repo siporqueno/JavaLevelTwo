@@ -30,7 +30,7 @@ public class ClientHandler {
                                     AuthService.getNickByLoginAndPass(token[1], token[2]);
                             //      Start of my code, home work of Lesson 7, task 2
                             if (newNick != null && !server.isNickOn(newNick))
-                            //      End of my code, home work of Lesson 8, task 2
+                            //      End of my code, home work of Lesson 7, task 2
                             {
 //                                sendMsg("/authok");
                                 // will pass nick to the client
@@ -41,7 +41,7 @@ public class ClientHandler {
                             } else {
                                 //      Start of my code, home work of Lesson 7, task 2
                                 sendMsg(server.isNickOn(newNick) ? "Such User is already authorized" : "Wrong login / password");
-                                //      End of my code, home work of Lesson 8, task 2
+                                //      End of my code, home work of Lesson 7, task 2
                             }
                         }
 
