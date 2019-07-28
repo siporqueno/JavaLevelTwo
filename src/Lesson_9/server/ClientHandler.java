@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
 public class ClientHandler {
@@ -23,7 +24,7 @@ public class ClientHandler {
             new Thread(() -> {
                 try {
                     // ставим таймаут по бездействию на сокет
-                    socket.setSoTimeout(10000);
+                    socket.setSoTimeout(120000);
 
                     // цикл авторизации.
                     while (true) {
@@ -41,6 +42,15 @@ public class ClientHandler {
                                 nick = newNick;
                                 sendMsg("/authok " + nick);
                                 server.subscribe(this);
+
+                                //            Start of my code, class work of Lesson 9
+                                try {
+                                    socket.setSoTimeout(0);
+                                } catch (SocketException e1) {
+                                    e1.printStackTrace();
+                                }
+                                //            End of my code, class work of Lesson 9
+
                                 break;
                             } else {
                                 //      Start of my code, home work of Lesson 7, task 2
