@@ -83,6 +83,12 @@ public class Controller {
                             }*/
                             //            End of my code, home work of Lesson 8
 
+                            //            Start of my code, class work of Lesson 9
+                            if (str.equals("/end")) {
+                                throw new RuntimeException("Таймаут (время на подключенеи клиенту) истек");
+                            }
+                            //            End of my code, class work of Lesson 9
+
                             // substituted equals with startsWith
                             if (str.startsWith("/authok")) {
                                 setAuthorized(true);
@@ -124,7 +130,13 @@ public class Controller {
                             } else textArea.appendText(str + "\n");
 
                         }
-                    } catch (IOException e) {
+                    }
+                    //            Start of my code, class work of Lesson 9
+                    catch (RuntimeException e) {
+                        System.out.println("Таймаут (время на подключенеи клиенту) истек socket.hashCode() " + this.hashCode());
+                    }
+                    //            End of my code, class work of Lesson 9
+                    catch (IOException e) {
                         e.printStackTrace();
                     } finally {
                         try {
@@ -138,23 +150,23 @@ public class Controller {
             }).start();
 
             //            Start of my code, home work of Lesson 8
-            /*new Thread(() -> {
-                try {
-                    Thread.sleep(120000);
-                    System.out.println("The time for authorisation (120 sec) is over.");
-                    textArea.appendText("The time for authorisation (120 sec) is over.");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (!isAuthorized) {
-                    try {
-                        out.writeUTF("/timeout120sec");
-                        out.writeUTF("/end");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();*/
+//            new Thread(() -> {
+//                try {
+//                    Thread.sleep(120000);
+//                    System.out.println("The time for authorisation (120 sec) is over.");
+//                    textArea.appendText("The time for authorisation (120 sec) is over.");
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                if (!isAuthorized) {
+//                    try {
+//                        out.writeUTF("/timeout120sec");
+//                        out.writeUTF("/end");
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }).start();
 //            End of my code, home work of Lesson 8
 
         } catch (IOException e) {

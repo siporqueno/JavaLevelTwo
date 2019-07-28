@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea"
-      fx:controller="Lesson_8.client.Controller">
+      fx:controller="Lesson_9.client.Controller">
 
     <HBox fx:id="upperPanel">
         <TextField fx:id="loginField" HBox.hgrow="ALWAYS" promptText="Login"/>

@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class ClientHandler {
     private Server server;
@@ -21,6 +22,9 @@ public class ClientHandler {
 
             new Thread(() -> {
                 try {
+                    // ставим таймаут по бездействию на сокет
+                    socket.setSoTimeout(10000);
+
                     // цикл авторизации.
                     while (true) {
                         String str = in.readUTF();
@@ -35,7 +39,7 @@ public class ClientHandler {
 //                                sendMsg("/authok");
                                 // will pass nick to the client
                                 nick = newNick;
-                                sendMsg("/authok "+nick);
+                                sendMsg("/authok " + nick);
                                 server.subscribe(this);
                                 break;
                             } else {
@@ -65,7 +69,8 @@ public class ClientHandler {
 
 //                        Start of my code, home work of Lesson 7, task 1
                         if (str.startsWith("/w")) {
-                            String[] token = str.split(" ", 3);
+//                            + в строке ниже это из регулярных выражений. Значит, что пробел может повторяться один или БОЛЕЕ раз!!!
+                            String[] token = str.split(" +", 3);
                             server.sendMsgFromNickToNick(token[2], getNick(), token[1]);
                         } else {
                             System.out.println(str);
@@ -74,6 +79,9 @@ public class ClientHandler {
 //                        End of my code, home work of Lesson 7, task 1
 
                     }
+                } catch (SocketTimeoutException e) {
+                    System.out.println("Таймаут (время на подключение клиенту) истек socket.hashCode() " + this.hashCode());
+                    sendMsg("/end");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
