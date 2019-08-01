@@ -78,4 +78,15 @@ public class AuthService {
         return sb.toString();
     }
 
+    public static boolean registration(String login, String password, String nickname) {
+        String sql = String.format("INSERT INTO main(login, password, nickname)\n" +
+                "VALUES('%s','%s','%s');", login, password, nickname);
+        int count = 0;
+        try {
+            count = stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count > 0;
+    }
 }

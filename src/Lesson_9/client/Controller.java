@@ -3,9 +3,13 @@ package Lesson_9.client;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.DataInputStream;
@@ -30,6 +34,8 @@ public class Controller {
     public PasswordField passwordField;
     @FXML
     public ListView<String> clientList;
+
+    RegController regController = null;
 
     // Added nick
     private String nick;
@@ -202,5 +208,35 @@ public class Controller {
     public void clickClientList(MouseEvent mouseEvent) {
         String receiver = clientList.getSelectionModel().getSelectedItem();
         textField.setText("/w " + receiver + " ");
+    }
+
+    public void tryToReg(ActionEvent actionEvent) {
+        if (socket == null || socket.isClosed()) {
+            connect();
+        }
+        if (regController == null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("regsample.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+
+                RegController regController = fxmlLoader.getController();
+                regController.controller = this;
+
+                this.regController = regController;
+
+                stage.setTitle("Registration");
+                stage.setScene(new Scene(root1));
+                stage.show();
+
+                System.out.println(root1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Stage stage = (Stage) regController.btnClose.getScene().getWindow();
+            stage.show();
+        }
     }
 }

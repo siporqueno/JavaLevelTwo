@@ -11,6 +11,7 @@
         <PasswordField fx:id="passwordField" HBox.hgrow="ALWAYS"
                        promptText="Password" onAction="#tryToAuth"/>
         <Button text="Authorize" onAction="#tryToAuth"/>
+        <Button text="Register" onAction="#tryToReg"/>
     </HBox>
 
 

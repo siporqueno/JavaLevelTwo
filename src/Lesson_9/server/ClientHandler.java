@@ -58,6 +58,13 @@ public class ClientHandler {
                                 //      End of my code, home work of Lesson 7, task 2
                             }
                         }
+                        // регистрация
+                        if (str.startsWith("/reg ")) {
+                            String[] token = str.split(" ");
+                            if (AuthService.registration(token[1], token[2], token[3]))
+                                sendMsg("Registration has been successful");
+                            else sendMsg("Registration has failed");
+                        }
 
                         //            Start of my code, home work of Lesson 8
                        /* if (str.equals("/timeout120sec")) {
